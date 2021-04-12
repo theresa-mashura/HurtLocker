@@ -67,11 +67,11 @@ public class GroceryList {
             if ( (prices.get(i-1).equals(prices.get(i))) && (i != prices.size() - 1) ) {
                 count++;
             } else if (i != prices.size() - 1 ){
-                priceStr.append("price: " + prices.get(i-1) + "           seen: " + count + "\n");
+                priceStr.append("price: " + prices.get(i-1) + "           seen: " + count + " times\n");
                 count = 1;
             } else {
                 count++;
-                priceStr.append("price: " + prices.get(i) + "           seen: " + count + "\n");
+                priceStr.append("price: " + prices.get(i) + "           seen: " + count + " times\n");
                 count = 1;
             }
         }
@@ -87,6 +87,8 @@ public class GroceryList {
         Integer[] countItems = this.countEachItem();
 
         System.out.printf(
+          "WORLD'S MOST PAINFULLY CREATED GROCERY LIST:\n"+
+          "--------------------------------------------\n"+
           "name: Milk            seen: %d times\n" +
           "==============        =============== \n" +
           "%s\n" +
