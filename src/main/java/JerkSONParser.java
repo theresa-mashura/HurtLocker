@@ -8,7 +8,6 @@ public class JerkSONParser {
 
     private GroceryList gl;
     private String jerkSONString;
-    private Integer exceptionCnt;
     private String keyValueRegex = ":";
     private String pairRegex = "[;^%*@!]";
     private String objRegex = "##";
@@ -16,7 +15,6 @@ public class JerkSONParser {
     public JerkSONParser(String jerkSONString) {
         this.jerkSONString = jerkSONString;
         this.gl = GroceryList.getInstance();
-        this.exceptionCnt = 0;
     }
 
     public List<List<String[]>> parseAll() {
@@ -48,7 +46,7 @@ public class JerkSONParser {
                 gl.addItem(g);
             } catch (Exception e) {
                 //System.out.println("Exception at object " + x);
-                this.exceptionCnt++;
+                gl.incrementErrors();
             }
         }
     }

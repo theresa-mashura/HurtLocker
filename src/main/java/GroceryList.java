@@ -6,15 +6,21 @@ import java.util.TreeMap;
 public class GroceryList {
 
     private ArrayList<GroceryItem> groceryList;
+    private Integer errors;
 
     private static final GroceryList INSTANCE = new GroceryList();
 
     private GroceryList() {
         this.groceryList = new ArrayList<GroceryItem>();
+        this.errors = 0;
     }
 
     public static GroceryList getInstance() {
         return INSTANCE;
+    }
+
+    public void incrementErrors() {
+        this.errors++;
     }
 
     public void addItem(GroceryItem groceryItem) {
@@ -81,26 +87,24 @@ public class GroceryList {
         Integer[] countItems = this.countEachItem();
 
         System.out.printf(
-          "name: Milk            seen: %d \n" +
-          "==============        ========== \n" +
+          "name: Milk            seen: %d times\n" +
+          "==============        =============== \n" +
           "%s\n" +
-          "\n" +
-          "name: Bread           seen: %d \n" +
-          "==============        ========== \n" +
+          "name: Bread           seen: %d times\n" +
+          "==============        =============== \n" +
           "%s\n" +
-          "\n" +
-          "name: Cookies         seen: %d \n" +
-          "==============        ========== \n" +
+          "name: Cookies         seen: %d times\n" +
+          "==============        =============== \n" +
           "%s\n" +
-          "\n" +
-          "name: Apples          seen: %d \n" +
-          "==============        ========== \n" +
-          "%s\n"
+          "name: Apples          seen: %d times\n" +
+          "==============        =============== \n" +
+          "%s\n" +
+          "Errors                seen: %d times"
         , countItems[0], milkPrice
         , countItems[1], breadPrice
         , countItems[2], cookiesPrice
         , countItems[3], applesPrice
-        );
+        , this.errors);
     }
 
 }
