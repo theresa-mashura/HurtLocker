@@ -1,5 +1,6 @@
 import org.apache.commons.io.IOUtils;
 import java.io.IOException;
+import java.util.ArrayList;
 
 public class Main {
 
@@ -11,9 +12,11 @@ public class Main {
 
     public static void main(String[] args) throws Exception{
         String output = (new Main()).readRawDataToString();
-        JerkSONParser j = new JerkSONParser(output);
 
+        JerkSONParser j = new JerkSONParser(output);
         j.createGroceryItems(j.parseAll());
-        GroceryList.printString();
+
+        GroceryList g = GroceryList.getInstance();
+        g.printString();
     }
 }
