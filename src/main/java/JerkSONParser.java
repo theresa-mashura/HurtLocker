@@ -26,21 +26,44 @@ public class JerkSONParser {
         }
     }
 
+//    public void parseAll() {
+//        //String testStr = "naMe:Milk;price:3.23;type:Food;expiration:1/25/2016##naME:BreaD;price:1.23;type:Food;expiration:1/02/2016##NAMe:BrEAD;price:1.23;type:Food;expiration:2/25/2016##naMe:MiLK;price:3.23;type:Food^ expiration:1/11/2016##";
+//        String[] objects = this.parse(objRegex, this.jerkSONString); // return one String array of all the jerkSON objects
+//        List<String[]> s = Stream.of(objects)
+//                .map( (obj) -> this.parse(pairRegex, obj) )
+//                .collect(Collectors.toList())   // Stream of String["name:milk", "price:1.23"] with the pairs from each object in each array
+//                ;
+//        List<List<String[]>> l = s.stream()
+//                .map(                                                   // for each string array in the stream....
+//                        array -> Stream.of(array)                               // create a stream of the objects in the array (the objs are the pairs)
+//                                .map( pair -> this.parse(keyValueRegex, pair) )     // split each pair & return new stream of string arrays (each string array is the key/value)
+//                                .collect(Collectors.toList())
+//                ).collect(Collectors.toList());
+//
+//        for(List<String[]> a : l) {
+//            for (String[] b : a) {
+//                for (String c : b) {
+//                    System.out.print(c + " ");
+//                };
+//            }
+//            System.out.print("\n");
+//        }
+//        //String[] pairs = this.parse()
+//    }
+
     public void parseAll() {
-        //String testStr = "naMe:Milk;price:3.23;type:Food;expiration:1/25/2016##naME:BreaD;price:1.23;type:Food;expiration:1/02/2016##NAMe:BrEAD;price:1.23;type:Food;expiration:2/25/2016##naMe:MiLK;price:3.23;type:Food^ expiration:1/11/2016##";
-        String[] objects = this.parse(objRegex, this.jerkSONString); // return one String array of all the jerkSON objects
-        List<String[]> s = Stream.of(objects)
+        String[] objects = this.parse(objRegex, this.jerkSONString);
+        List<List<String[]>> lists = Stream.of(objects)
             .map( (obj) -> this.parse(pairRegex, obj) )
-            .collect(Collectors.toList())   // Stream of String["name:milk", "price:1.23"] with the pairs from each object in each array
-        ;
-        List<List<String[]>> l = s.stream()
-                .map(                                                   // for each string array in the stream....
-                    array -> Stream.of(array)                               // create a stream of the objects in the array (the objs are the pairs)
-                        .map( pair -> this.parse(keyValueRegex, pair) )     // split each pair & return new stream of string arrays (each string array is the key/value)
+            .collect(Collectors.toList())
+            .stream()
+                .map(
+                    array -> Stream.of(array)
+                        .map( pair -> this.parse(keyValueRegex, pair) )
                         .collect(Collectors.toList())
             ).collect(Collectors.toList());
 
-        for(List<String[]> a : l) {
+        for(List<String[]> a : lists) {
             for (String[] b : a) {
                 for (String c : b) {
                     System.out.print(c + " ");
@@ -48,7 +71,6 @@ public class JerkSONParser {
             }
             System.out.print("\n");
         }
-        //String[] pairs = this.parse()
     }
 
 //    public String[] parseObjStrings() {
