@@ -11,7 +11,17 @@ public class Main {
 
     public static void main(String[] args) throws Exception{
         String output = (new Main()).readRawDataToString();
-        System.out.println(output);
+        JerkSONParser j = new JerkSONParser(output);
 
+        //j.parseObjStrings();
+        //String objStr = "naMe:Milk;price:3.23;type:Food;expiration:1/25/2016";
+        //String objStr = "naME:BreaD;price:1.23;type:Food@expiration:1/02/2016";
+        //j.parsePairs(objStr);
+
+        //String keyValueStr = "name:";
+        //String keyValueStr = ":food";
+        //j.parseKeyValues(keyValueStr);
+
+        j.parseAll();
     }
 }
